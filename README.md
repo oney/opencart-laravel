@@ -30,4 +30,19 @@ You can add `require_once(DIR_SYSTEM.'laravel/load.php');` to the bottom of `sys
 
 You can take a look at `system/laravel` directory, all things in there.
 
+### About Model
+Because some tables of Opencart have no 'date_added' or 'date_modified' DATETIME column, you have to add them. Then, override laravel default timestame setting.
+Assign table name and primary key to Eloquent model.
+Those modification is below
+```
+<?php namespace App\Eloquent;
+
+class Customer extends EncapsulatedEloquentBase
+{
+	protected $table = 'customer';
+	protected $primaryKey = 'customer_id';
+	const CREATED_AT = 'date_added';
+	const UPDATED_AT = 'date_modified';
+```
+
 Please collect me if codes have any mistake
